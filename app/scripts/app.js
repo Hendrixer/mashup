@@ -13,14 +13,14 @@ app.config(function ($routeProvider) {
       templateUrl: 'views/main.html',
       controller: 'MainCtrl'
     })
-    // .when('/signin',{
-    //   templateUrl: 'views/signin.html',
-    //   controller: 'SigninController'
-    // })
-    // .when('/profile',{
-    //   templateUrl: 'views/profile.html',
-    //   controller: 'Profile.html'
-    // })
+    .when('/signin',{
+      templateUrl: 'views/signin.html',
+      controller: 'SigninController'
+    })
+    .when('/profile',{
+      templateUrl: 'views/profile.html',
+      controller: 'ProfileController'
+    })
     .otherwise({
       redirectTo: '/'
     });
