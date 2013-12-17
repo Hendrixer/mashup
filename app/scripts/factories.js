@@ -29,35 +29,10 @@ angular.module('mashupApp')
 })
 .factory('Auth', function(/* dependency injection */ $q, $http){
   var service = {
-    getAuth: function(){
-      var d = $q.defer();
-      $http({
-        method: 'POST',
-        url: '/instagram',
-        data: {url: 'https://api.instagram.com/oauth/authorize/?client_id=ef52537333bb4b31948821519a949d73&redirect_uri=http://127.0.0.1:3000/#/profile&response_type=code'}
-      }).success(function(data){
-        d.resolve(data);
-        //link['data'] = new Date(link.created_at);
-        console.log('data', data);
-      }).error(function(data){
-        d.reject(reason);
-      });
-      return d.promise;
-    },
-    postLinks: function(data){
-      var d = $q.defer();
-      $http({
-        method: 'POST',
-        url: '/links',
-        data: JSON.stringify(data)
-      }).success(function(data){
-        d.resolve(data);
-      }).error(function(data){
-        d.reject(reason);
-      });
-      return d.promise;
+    getAuth: function(url) {
+      window.open(url);
     }
-  };
+  };  
   return service;
 });
 

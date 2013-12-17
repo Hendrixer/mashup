@@ -3,6 +3,7 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var path = require('path');
+var api = require('./api');
 var things = [];
 
 var host = process.env.IP || '127.0.0.1';
@@ -30,44 +31,35 @@ var sendResponse = function(status, res, stuff) {
   res.end(stuff);
 };
 
-
-var sendStattic = function(res, folder, asset){
-    if(asset === '/'){
-        asset = '/index.html';
+var sendStattic = function(res, req, folder, asset){
+  if(asset === '/'){
+    asset = '/index.html';
+  }
+  fs.readFile(folder + asset, function(err, html){
+    if(err){
+      console.log(err);
+    } else{
+      headers['Content-Type'] = extensions[path.extname(asset)];
+      sendResponse(200, res, html);
     }
-    fs.readFile(folder + asset, function(err, html){
-        if(err){
-            console.log(err);
-        } else{
-            headers['Content-Type'] = extensions[path.extname(asset)];
-            sendResponse(200, res, html);
-        }
-    });
+  });
 };
 
 var getSite = function(req, res){
   console.log('req', req.url);
     var folder = 'app';
     var pathname = url.parse(req.url).pathname;
-    sendStattic(res, folder, pathname);
+    if(pathname === '/instagram') {
+      api.auth(req, res);
+    } else{
+      sendStattic(res, req, folder, pathname);
+    }
+   
 };
-
-var sendAPI = function(req, res) {
-  var url = '';
-  req.on('data', function(data) {
-    url += data;
-  });
-  req.on('end', function() {
-    console.log('url', url);
-  });
-  sendResponse(200, res);
-};
-
 
 var verbs = {
   "GET": getSite,
-  "OPTIONS": sendResponse,
-  "POST": sendAPI
+  "OPTIONS": sendResponse
 };
 
 var handle = function(req, res) {
