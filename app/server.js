@@ -45,21 +45,33 @@ var sendStattic = function(res, req, folder, asset){
   });
 };
 
+var consume = function(req, res) {
+  var data = '';
+  req.on('data', function(info) {
+    data += info;
+  });
+  req.on('end', function() {
+    console.log('goods', data);
+  });
+};
+
 var getSite = function(req, res){
   console.log('req', req.url);
-    var folder = 'app';
-    var pathname = url.parse(req.url).pathname;
-    if(pathname === '/instagram') {
-      api.auth(req, res);
-    } else{
-      sendStattic(res, req, folder, pathname);
-    }
-   
+  var folder = 'app';
+  var pathname = url.parse(req.url).pathname;
+  if(pathname === '/api') {
+    consume(req, res);
+  } else{
+    sendStattic(res, req, folder, pathname);
+  }
 };
+
+
 
 var verbs = {
   "GET": getSite,
-  "OPTIONS": sendResponse
+  "OPTIONS": sendResponse,
+  "POST": consume
 };
 
 var handle = function(req, res) {

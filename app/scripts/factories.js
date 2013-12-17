@@ -35,7 +35,7 @@ angular.module('mashupApp')
   return service;
 })
 .factory("API", function($location, $cookieStore) {
-  var service{
+  var service = {
     currentUser: null,
     isAuth: function() {
       return !!service.currentUser

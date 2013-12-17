@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mashupApp')
-  .controller('MainCtrl', function ($scope, $firebase, $location, $cookieStore, AUTH,  Session) {
+  .controller('MainCtrl', function ($scope, $firebase, $location, $cookieStore, API, Session) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -11,16 +11,17 @@ angular.module('mashupApp')
       Session.auth.login('twitter');
     };
     $scope.url = function() {
-      
+      API.getAuth();
     };
   })
   .controller('SigninController', function($scope) {
     $scope.name = 'signin';
   })
-  .controller('ProfileController', function($scope, $firebase, Session, Auth) {
+  .controller('ProfileController', function($scope, $firebase, Session, Auth, API) {
     $scope.auth = function(){
       Auth.getAuth("https://api.instagram.com/oauth/authorize/?client_id=ef52537333bb4b31948821519a949d73&redirect_uri=http://127.0.0.1:3000/&response_type=code");
     };
+    $scope.insta = API.currentUser;
     $scope.name = Session.currentUser;
     $scope.pic = Session.currentUser.profile_image_ur;
     var ref = new Firebase("https://mashup.firebaseio.com/");
