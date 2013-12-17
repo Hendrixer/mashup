@@ -24,15 +24,29 @@ angular.module('mashupApp')
     auth: auth
   };
   services.currentUser = $cookieStore.get('user');
-  console.log('cookies',$cookieStore.get('user'));
   return services;
 })
 .factory('Auth', function(/* dependency injection */ $q, $http){
   var service = {
     getAuth: function(url) {
-      window.open(url);
+      window.location.href = url;
     }
   };  
   return service;
-});
+})
+.factory("API", function($location, $cookieStore) {
+  var service{
+    currentUser: null,
+    isAuth: function() {
+      return !!service.currentUser
+    },
+    getAuth: function() {
+      if($location.search().code){
+        $cookieStore.put('insta', $location.search().code);
+      }
+    }
+  };
+  service.currentUser = $cookieStore.get('insta');
+  return service;
+})
 

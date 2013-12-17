@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mashupApp')
-  .controller('MainCtrl', function ($scope, $firebase, $location, $cookieStore, Session) {
+  .controller('MainCtrl', function ($scope, $firebase, $location, $cookieStore, AUTH,  Session) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -9,6 +9,9 @@ angular.module('mashupApp')
     ];
     $scope.authenticate = function() {
       Session.auth.login('twitter');
+    };
+    $scope.url = function() {
+      
     };
   })
   .controller('SigninController', function($scope) {
