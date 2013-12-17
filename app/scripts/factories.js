@@ -2,19 +2,19 @@
 
 angular.module('mashupApp')
 
-.factory('Session', function($location) {
+.factory('Session', function($location, $cookieStore) {
   var fireRef = new Firebase('https://mashup.firebaseio.com');
   var auth = new FirebaseSimpleLogin(fireRef, function(error, user) {
     if (error) {
       console.log(error);
     } else if (user) {
-      console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
-      console.log('user', user);
+      $cookieStore.put('user', user.id);
+      console.log(user);
       services.currentUser = user;
-      console.log('session', services);
       $location.path('/profile');
     }
-  });  
+  });
+
   var services = {
     currentUser: null,
     isLoggedIn: function() {
@@ -23,6 +23,8 @@ angular.module('mashupApp')
     fireRef: fireRef,
     auth: auth
   };
+  services.currentUser = $cookieStore.get('user');
+  console.log('cookies',$cookieStore.get('user'));
   return services;
 });
 

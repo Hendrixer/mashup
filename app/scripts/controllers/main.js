@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mashupApp')
-  .controller('MainCtrl', function ($scope, $firebase, $location, Session) {
+  .controller('MainCtrl', function ($scope, $firebase, $location, $cookieStore, Session) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -14,6 +14,13 @@ angular.module('mashupApp')
   .controller('SigninController', function($scope) {
     $scope.name = 'signin';
   })
-  .controller('ProfileController', function($scope) {
-    $scope.name = 'profile';
-  })
+  .controller('ProfileController', function($scope, $firebase, Session) {
+    $scope.name = Session.currentUser;
+    $scope.pic = Session.currentUser.profile_image_ur;
+    var ref = new Firebase("https://mashup.firebaseio.com/");
+    $scope.user = $firebase(ref);
+    $scope.addUser = function() {
+      $scope.user.$add({name: $scope.name.name, id: $scope.name.id});
+      console.log($scope.name);
+    };
+  });
