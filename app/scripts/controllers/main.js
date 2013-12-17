@@ -14,7 +14,10 @@ angular.module('mashupApp')
   .controller('SigninController', function($scope) {
     $scope.name = 'signin';
   })
-  .controller('ProfileController', function($scope, $firebase, Session) {
+  .controller('ProfileController', function($scope, $firebase, Session, Auth) {
+    $scope.auth = function(){
+      Auth.getAuth();
+    };
     $scope.name = Session.currentUser;
     $scope.pic = Session.currentUser.profile_image_ur;
     var ref = new Firebase("https://mashup.firebaseio.com/");

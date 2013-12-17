@@ -5,7 +5,7 @@ var url = require('url');
 var path = require('path');
 var things = [];
 
-var host = process.env.IP || 'localhost';
+var host = process.env.IP || '127.0.0.1';
 
 var port = process.env.PORT || 3000;
 
@@ -52,22 +52,22 @@ var getSite = function(req, res){
     sendStattic(res, folder, pathname);
 };
 
-var saveTodo = function(req, res) {
-  var todos = '';
-  req.on('data', function(todo) {
-    todos += todo;
+var sendAPI = function(req, res) {
+  var url = '';
+  req.on('data', function(data) {
+    url += data;
   });
   req.on('end', function() {
-      todos = JSON.parse(todos);
+    console.log('url', url);
   });
-  things.push(todos);
-  console.log('save todo');
   sendResponse(200, res);
 };
 
+
 var verbs = {
-    "GET": getSite,
-    "POST": saveTodo
+  "GET": getSite,
+  "OPTIONS": sendResponse,
+  "POST": sendAPI
 };
 
 var handle = function(req, res) {
