@@ -77,3 +77,34 @@ body {
     border-bottom: 0;
   }
 }
+
+.whendo-logo {
+  font-size: 10em;
+}
+
+.do {
+  color: #e74c3c;
+  border-bottom: 8px dotted #e74c3c;
+}
+
+a.when{
+  color: inherit;
+}
+a.when:hover {
+  text-decoration: none;
+  opacity: 0.5
+}
+
+.icon {
+  max-height: 100;
+  max-width: 100;
+  margin-bottom: 10px;
+}
+.icon:hover{
+  opacity: 0.5;
+}
+.row.insta {
+  max-height: 300px;
+  max-width: 300px;
+  background-image: url('insta.jpg') no-repeat;
+}

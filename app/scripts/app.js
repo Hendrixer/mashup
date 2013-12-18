@@ -8,7 +8,7 @@ var app = angular.module('mashupApp', [
   'firebase'
 ]);
 app.config(function ($routeProvider, $locationProvider) {
-  $locationProvider.html5Mode(true);
+  //$locationProvider.html5Mode(true);
   $routeProvider
     .when('/', {
       templateUrl: 'views/main.html',
@@ -20,6 +20,10 @@ app.config(function ($routeProvider, $locationProvider) {
     })
     .when('/profile',{
       templateUrl: 'views/profile.html',
+      controller: 'ProfileController'
+    })
+    .when('/when',{
+      templateUrl: 'views/when.html',
       controller: 'ProfileController'
     })
     .otherwise({

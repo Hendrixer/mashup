@@ -19,10 +19,13 @@ twit.verifyCredentials(function(err, data) {
 Instagram.users.search({
 	q: 'body_smarts',
 	complete: function(data) {
-		var pic = data[0].profile_picture;
-		twit.updateStatus('making an app with #webhooks #node #expressjs #angularjs during this #hackathon @hackreactor', function(err, data) {
-			console.log('twitter',data);
-		})
+		console.log('data', data);
+		// twit.updateStatus('yo', function(err, data) {
+		// 	if(err) {
+		// 		console.log('error',err);
+		// 	}
+		// 	console.log('twitter',data);
+		// });
 	}
 });
 
