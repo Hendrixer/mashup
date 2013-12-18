@@ -22,7 +22,8 @@ exports.auto = function() {
 		q: 'body_smarts',
 		complete: function(data) {
 			console.log('data', data);
-			twit.updateStatus('testing my app', function(err, data) {
+			var pic = data[0].profile_picture;
+			twit.updateStatus('hack demo at @hackreator', function(err, data) {
 				if(err) {
 					console.log('error',err);
 				}
