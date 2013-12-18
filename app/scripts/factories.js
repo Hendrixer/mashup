@@ -34,7 +34,7 @@ angular.module('mashupApp')
   };  
   return service;
 })
-.factory("API", function($location, $cookieStore) {
+.factory("API", function($location, $cookieStore, $http) {
   var service = {
     currentUser: null,
     isAuth: function() {
@@ -44,6 +44,12 @@ angular.module('mashupApp')
       if($location.search().code){
         $cookieStore.put('insta', $location.search().code);
       }
+    },
+    send: function(){
+      $http({
+        method: 'GET',
+        url: '/api'
+      });
     }
   };
   service.currentUser = $cookieStore.get('insta');

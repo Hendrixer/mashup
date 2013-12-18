@@ -16,18 +16,22 @@ var twit = new twitter({
 twit.verifyCredentials(function(err, data) {
 	console.log(data.profile_image_url);
 });
-Instagram.users.search({
-	q: 'body_smarts',
-	complete: function(data) {
-		console.log('data', data);
-		// twit.updateStatus('yo', function(err, data) {
-		// 	if(err) {
-		// 		console.log('error',err);
-		// 	}
-		// 	console.log('twitter',data);
-		// });
-	}
-});
+
+exports.auto = function() {
+	Instagram.users.search({
+		q: 'body_smarts',
+		complete: function(data) {
+			console.log('data', data);
+			twit.updateStatus('testing my app', function(err, data) {
+				if(err) {
+					console.log('error',err);
+				}
+				console.log('twitter',data);
+			});
+		}
+	});
+}
+
 
 
 

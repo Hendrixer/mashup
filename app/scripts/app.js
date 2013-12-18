@@ -26,6 +26,22 @@ app.config(function ($routeProvider, $locationProvider) {
       templateUrl: 'views/when.html',
       controller: 'ProfileController'
     })
+    .when('/trigger', {
+      templateUrl: 'views/trigger.html',
+      controller: 'ProfileController'
+    })
+    .when('/do', {
+      templateUrl: 'views/do.html',
+      controller: 'ProfileController'
+    })
+    .when('/dothis', {
+      templateUrl: 'views/dothis.html',
+      controller: 'ProfileController'
+    })
+    .when('/activate', {
+      templateUrl: 'views/activate.html',
+      controller: 'ProfileController'
+    })
     .otherwise({
       redirectTo: '/'
     });

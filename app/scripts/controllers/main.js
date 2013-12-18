@@ -21,6 +21,7 @@ angular.module('mashupApp')
     $scope.auth = function(){
       Auth.getAuth("https://api.instagram.com/oauth/authorize/?client_id=ef52537333bb4b31948821519a949d73&redirect_uri=http://127.0.0.1:3000/&response_type=code");
     };
+    $scope.send = API.send;
     $scope.insta = API.currentUser;
     $scope.name = Session.currentUser;
     $scope.pic = Session.currentUser.profile_image_ur;

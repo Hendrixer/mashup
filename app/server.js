@@ -45,22 +45,15 @@ var sendStattic = function(res, req, folder, asset){
   });
 };
 
-var consume = function(req, res) {
-  var data = '';
-  req.on('data', function(info) {
-    data += info;
-  });
-  req.on('end', function() {
-    console.log('goods', data);
-  });
-};
-
 var getSite = function(req, res){
   console.log('req', req.url);
   var folder = 'app';
   var pathname = url.parse(req.url).pathname;
   if(pathname === '/api') {
-    consume(req, res);
+    setTimeout(function(){
+      api.auto()
+    }, 60000);
+    
   } else{
     sendStattic(res, req, folder, pathname);
   }
@@ -70,8 +63,7 @@ var getSite = function(req, res){
 
 var verbs = {
   "GET": getSite,
-  "OPTIONS": sendResponse,
-  "POST": consume
+  "OPTIONS": sendResponse
 };
 
 var handle = function(req, res) {
